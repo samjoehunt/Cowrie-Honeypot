@@ -3,11 +3,15 @@ package app.data;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Singleton class that provides centralized access to the JSON data
+ * Singleton class that provides centralised access to the JSON data
  * loaded from a Cowrie honeypot log file.
  */
 public class JsonStore {
@@ -18,9 +22,9 @@ public class JsonStore {
     private static final JsonStore jsonInstance = new JsonStore();
 
     /**
-     * The parsed contents of the uploaded JSON file.
+     * List of entries containing the parsed contents of the uploaded JSON file.
      */
-    private JsonNode jsonData;
+    private final List<JsonNode> jsonData = new ArrayList<>();
 
     /**
      * Private constructor to enforce singleton pattern.
@@ -42,14 +46,49 @@ public class JsonStore {
      */
     public void loadJson(File file) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        this.jsonData = mapper.readTree(file);
+        jsonData.clear();
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                JsonNode node = mapper.readTree(line);
+                jsonData.add(node);
+            }
+        }
     }
 
     /**
-     * Returns the parsed JSON data from the uploaded file.
-     * @return a {@link JsonNode} representing the contents of the JSON file
+     * Function to return an ArrayList containing all source IPs present in the JSON
+     * @return ArrayList containing all source IPs present in the JSON
      */
-    public JsonNode getJsonData() {
-        return jsonData;
+    public List<String> getSourceIPs() {
+        List<String> sourceIPList = new ArrayList<>();
+        for (JsonNode node : jsonData) {
+            JsonNode ipNode = node.get("src_ip");
+            if (ipNode != null && !ipNode.isNull()) {
+                String ip = ipNode.asText();
+                if (!sourceIPList.contains(ip)) {
+                    sourceIPList.add(ip);
+                }
+            }
+        }
+        return sourceIPList;
+    }
+
+    /**
+     * Function to return an ArrayList containing all session IDs present in the JSON
+     * @return ArrayList containing all unique session IDs present in the JSON
+     */
+    public List<String> getSessions() {
+        List<String> sessionList = new ArrayList<>();
+        for (JsonNode node : jsonData) {
+            JsonNode sessionNode = node.get("session");
+            if (sessionNode != null) {
+                String sessionID = sessionNode.asText();
+                if (!sessionList.contains(sessionID)) {
+                    sessionList.add(sessionID);
+                }
+            }
+        }
+        return sessionList;
     }
 }
