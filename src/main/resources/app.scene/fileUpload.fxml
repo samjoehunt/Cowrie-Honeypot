@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="app.scene.controllers.FileUploadController">
+
+    <VBox alignment="CENTER" spacing="10">
+        <Text text="Honeypot Log Analysis Tool" style="-fx-font-size: 48px; -fx-fill: grey;"/>
+        <Button text="Upload Log" onAction="#uploadFile"
+                style="-fx-text-fill: grey;
+                -fx-font-size: 14px;
+                -fx-cursor: hand;"/>
+        <Label fx:id="fileNameLabel" text="No file uploaded"
+               style="-fx-font-size: 14px;
+               -fx-text-fill: grey;"/>
+        <Button fx:id="dashboardButton" text="Next" onAction="#dashboardScene" visible="false" managed="false"
+                style="-fx-font-size: 14px;
+                -fx-text-fill: grey;"/>
+    </VBox>
+</StackPane>
