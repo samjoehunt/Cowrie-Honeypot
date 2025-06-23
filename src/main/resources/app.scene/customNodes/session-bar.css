@@ -1,0 +1,9 @@
+.session-bar {
+    -fx-border-color: transparent;
+    -fx-border-width: 2;
+    -fx-border-radius: 10;
+}
+
+.session-bar:hover {
+    -fx-border-color: #CFCFCF;
+}

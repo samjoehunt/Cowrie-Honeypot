@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root type="HBox" xmlns:fx="http://javafx.com/fxml/1"
+         spacing="10"
+         style="-fx-padding: 10; -fx-background-color: #EBEBEB; -fx-background-radius: 10;"
+         onMouseClicked="#handleClick"
+         styleClass="session-bar">
+    <Label fx:id="sessionNumLabel" style="-fx-text-fill: grey; -fx-font-size: 18px;" text="1"/>
+    <Region HBox.hgrow="ALWAYS"/>
+    <Label fx:id="sourceIPLabel" style="-fx-text-fill: grey; -fx-font-size: 18px;" text="2"/>
+    <Region HBox.hgrow="ALWAYS"/>
+    <Label fx:id="sessionTimeLabel" style="-fx-text-fill: grey; -fx-font-size: 18px;" text="3"/>
+</fx:root>
+

@@ -9,13 +9,28 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Controller class for fileUpload.fxml
+ */
 public class FileUploadController {
+    /**
+     * Label containing the file name uploaded by the user
+     */
     @FXML
     private Label fileNameLabel;
 
+    /**
+     * Button instance directing the user to the dashboard scene
+     */
     @FXML
     private Button dashboardButton;
 
+    /**
+     * Function to be called when the "Upload" button is clicked.
+     * Brings up a file chooser, restricted to only allow the user to choose .json files.
+     * If a valid file is selected, the fileNameLabel is updated to display the chosen file's name,
+     * and dashboardButton is made visible and managed.
+     */
     @FXML
     public void uploadFile() {
         FileChooser fileChooser = new FileChooser();
@@ -37,6 +52,9 @@ public class FileUploadController {
         }
     }
 
+    /**
+     * Function to change the scene to the dashboard scene
+     */
     @FXML
     public void dashboardScene() {
         SceneController.switchScene("/app.scene/dashboard.fxml");

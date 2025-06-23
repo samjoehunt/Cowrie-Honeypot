@@ -34,13 +34,16 @@ public class SceneController {
 
             // To ensure that the screen stays in maximised, fullscreen mode, we set the stage's width and height
             // manually. Otherwise, the window will appear windowed, whilst technically being "maximised".
-            primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
+            Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
+            scene.getStylesheets().add(SceneController.class.getResource("/app.scene/customNodes/session-bar.css").toExternalForm());
+
+            primaryStage.setScene(scene);
             primaryStage.setTitle("Log Analyser");
             primaryStage.setMaximized(true);
             root.requestFocus();
             primaryStage.show();
         } catch (IOException e) {
-            System.err.println("Error switching scenes: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

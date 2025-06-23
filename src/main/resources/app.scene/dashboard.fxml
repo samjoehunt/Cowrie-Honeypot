@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import app.scene.customNodes.SessionBar?>
+<?import javafx.scene.text.Text?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="app.scene.controllers.DashboardController">
+    <top>
+        <HBox alignment="CENTER">
+            <Text text="Sessions" style="-fx-font-size: 48px; -fx-fill: grey;"/>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true">
+            <VBox alignment="CENTER" spacing="2">
+                <SessionBar/>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>
